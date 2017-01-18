@@ -12,4 +12,9 @@ class PageController
     {
         require_once('app/Resources/view/authTemplate.php');
     }
+
+    public function commentsAction()
+    {
+        require_once('app/Resources/view/baseTemplate.php');
+    }
 }

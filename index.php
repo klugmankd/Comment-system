@@ -1,21 +1,16 @@
 <?php
 
-    require_once 'app/Resources/view/headerTemplate.php';
+    if(empty(isset($_GET['route']))) {
+        require_once 'app/Resources/view/styleTemplate.php';
+        require_once 'app/Resources/view/headerTemplate.php';
+        require_once 'app/Resources/view/homeTemplate.php';
+    } else require_once 'app/Resources/view/headTemplate.php';
     if (isset($_GET['route'])) {
         $url = $_GET['route'];
         $url = rtrim($url, '/');
         $url = explode('/', $url);
 
         require 'src/controller/'.$url[0].'.php';
-    }
-
-    if ((isset($_POST['auth']))) {
-        require_once ('app/Resources/view/authTemplate.php');
-    } else
-    if ((isset($_POST['registration']))) {
-        require_once('app/Resources/view/registrationTemplate.php');
-    } else {
-        require_once 'app/Resources/view/baseTemplate.php';
     }
 
     $controller = new $url[0];

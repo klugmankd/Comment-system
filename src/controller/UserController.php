@@ -35,7 +35,7 @@ class UserController
         $user->setLastName($_POST['lastName']);
         $result = $userModel->create($user);
         $database->closeDB($connect);
-        header('location: /');
+        header('location: authAction');
     }
 
     public function checkAction()
@@ -50,9 +50,10 @@ class UserController
         $userData = $userModel->read($user['username']);
         if ($user['username'] == $userData['username']
             && $user['password'] == $userData['password']) {
-            session_start();
-            $_SESSION['id'] = $userData['id'];
-            header('location: /');
+//            session_start();
+//            $_SESSION['id'] = $userData['id'];
+//            header('location: ../PageController/commentsAction');
+            echo "ok";
         } else {
             echo "no ok";
         }

@@ -1,12 +1,11 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv=
-          "X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Comments</title>
-    <link href="web/css/bootstrap.css" rel="stylesheet">
-    <link href="web/css/style.css" rel="stylesheet">
 </head>
 <body>
+<header class="nav navbar-form">
+    <form action="UserController/regAction" method="post">
+        <input type="submit" class="btn navbar-btn" name="registration" value="registration">
+    </form>
+    <form action="UserController/authAction" method="post">
+        <input type="submit" class="btn navbar-btn" name="auth" value="auth">
+    </form>
+    <hr>
+</header>
