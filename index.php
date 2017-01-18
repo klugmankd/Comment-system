@@ -1,10 +1,16 @@
 <?php
+    session_start();
 
     if(empty(isset($_GET['route']))) {
         require_once 'app/Resources/view/styleTemplate.php';
         require_once 'app/Resources/view/headerTemplate.php';
         require_once 'app/Resources/view/homeTemplate.php';
-    } else require_once 'app/Resources/view/headTemplate.php';
+    } else {
+        require_once 'app/Resources/view/headTemplate.php';
+        if ($_GET['route'] == 'PageController/commentsAction')
+            require_once 'app/Resources/view/logoutTemplate.php';
+    }
+
     if (isset($_GET['route'])) {
         $url = $_GET['route'];
         $url = rtrim($url, '/');

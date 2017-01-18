@@ -1,6 +1,6 @@
 <div class="container">
 <h2>Reg</h2>
-    <form action="createAction" method="post">
+    <form action="../UserController/createAction" method="post">
         <input type="text" name="username" placeholder="username"><br><br>
         <input type="password" name="password" placeholder="password"><br><br>
         <input type="email" name="email" placeholder="email"><br><br>

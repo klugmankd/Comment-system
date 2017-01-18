@@ -19,10 +19,10 @@ class CommentController
         $comment = new Comment();
         $comment->setContent($_POST['content']);
         $comment->setParent(0);
-        $comment->setUser(1);
+        $comment->setUser($_SESSION['id']);
         $result = $commentModel->create($comment);
         $database->closeDB($connect);
-        if ($result) echo "ok";
+        header("Location: ../PageController/commentsAction");
     }
 
     public function readAction($id)
@@ -32,7 +32,7 @@ class CommentController
         $commentModel = new CommentModel($connect);
         $result = $commentModel->read($id);
         $database->closeDB($connect);
-        echo $result['id']." - ".$result['content']." ".$result['create_date'];
+        header("Location: ../PageController/commentsAction");
     }
 
     public function updateAction()
@@ -64,7 +64,6 @@ class CommentController
         $commentModel = new CommentModel($connect);
         $result = $commentModel->getAllComments();
         require_once 'app/Resources/view/commentsTemplate.php';
-        echo $_GET['id'];
         $database->closeDB($connect);
     }
 

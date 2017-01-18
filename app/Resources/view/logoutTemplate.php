@@ -1,0 +1,1 @@
+<a href="logoutAction">Logout</a>
