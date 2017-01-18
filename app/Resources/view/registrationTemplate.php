@@ -1,11 +1,12 @@
-<div class="container">
-<h2>Reg</h2>
-    <form action="../UserController/createAction" method="post">
-        <input type="text" name="username" placeholder="username"><br><br>
-        <input type="password" name="password" placeholder="password"><br><br>
-        <input type="email" name="email" placeholder="email"><br><br>
-        <input type="text" name="firstName" placeholder="firstName"><br><br>
-        <input type="text" name="lastName" placeholder="lastName"><br><br>
-        <input type="submit" value="ok">
+<div class="container form">
+    <a class="link animation" href="authAction">Auth form</a>
+    <form action="../UserController/createAction" method="post" autocomplete="off">
+        <h2>Reg form</h2>
+        <input class="formField" type="text" name="username" placeholder="username">
+        <input class="formField" type="password" name="password" placeholder="password">
+        <input class="formField" type="email" name="email" placeholder="email">
+        <input class="formField" type="text" name="firstName" placeholder="firstName">
+        <input class="formField" type="text" name="lastName" placeholder="lastName">
+        <input class="formBtn animation" type="submit" value="ok">
     </form>
 </div>

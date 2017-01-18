@@ -1,1 +1,1 @@
-<a href="logoutAction">Logout</a>
+<a class="link animation" href="logoutAction">Logout</a>

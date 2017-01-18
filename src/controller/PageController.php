@@ -36,14 +36,12 @@ class PageController
     {
         if(empty($_SESSION["id"]))
             header("Location: homeAction");
-        require_once('app/Resources/view/baseTemplate.php');
         $database = new Database();
         $connect = $database->connectDB();
         $commentModel = new CommentModel($connect);
         $result = $commentModel->getAllComments();
         require_once 'app/Resources/view/commentsTemplate.php';
         $database->closeDB($connect);
-        echo "User(session) id - ".$_SESSION['id'];
     }
 
     public function logoutAction() {

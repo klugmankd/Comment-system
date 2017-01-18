@@ -20,42 +20,49 @@ class CommentController
         $comment->setContent($_POST['content']);
         $comment->setParent(0);
         $comment->setUser($_SESSION['id']);
-        $result = $commentModel->create($comment);
+        $commentModel->create($comment);
+        $record = $commentModel->getLastComment();
         $database->closeDB($connect);
-        header("Location: ../PageController/commentsAction");
+        require_once 'app/Resources/view/commentTemplate.php';
     }
 
     public function readAction($id)
     {
+//        if (empty($id)) {
+            $id = $_POST['id'];
+//        }
         $database = new Database();
         $connect = $database->connectDB();
         $commentModel = new CommentModel($connect);
-        $result = $commentModel->read($id);
+        $record = $commentModel->read($id);
         $database->closeDB($connect);
-        header("Location: ../PageController/commentsAction");
+        echo "<textarea name='editArea'>".$record['content']."</textarea>
+            <input type='button' class='sendEdit' value='send'>";
     }
 
     public function updateAction()
     {
+        $id = $_POST['id'];
         $database = new Database();
         $connect = $database->connectDB();
         $comment = new Comment();
         $comment->setContent($_POST['content']);
         $commentModel = new CommentModel($connect);
-        $result = $commentModel->update($_POST['id'], $comment);
-        if ($result)
-            header("Location: readAction/".$_POST['id']);
+        $commentModel->update($id, $comment);
+        $record = $commentModel->read($id);
         $database->closeDB($connect);
+        require_once 'app/Resources/view/commentTemplate.php';
     }
 
-    public function deleteAction($id)
+    public function deleteAction()
     {
+        $id = $_POST['id'];
         $database = new Database();
         $connect = $database->connectDB();
         $commentModel = new CommentModel($connect);
         $result = $commentModel->delete($id);
         $database->closeDB($connect);
-        if ($result) echo "ok";
+//        if ($result) echo "ok";
     }
 
     public function getAllAction() {

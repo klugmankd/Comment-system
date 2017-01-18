@@ -42,7 +42,7 @@ class UserController
             && $user['password'] == $userData['password']) {
             $_SESSION['id'] = $userData['id'];
             header('location: ../PageController/commentsAction');
-        }
+        } else header("Location: ../PageController/authAction");
         $database->closeDB($connect);
     }
 }

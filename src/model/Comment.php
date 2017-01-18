@@ -68,4 +68,12 @@ class Comment
         return $query;
     }
 
+    public function getLastComment()
+    {
+        $expression = "SELECT * FROM `Comment-system_DB`.Comment ORDER BY id DESC LIMIT 1;";
+        $query = mysqli_query($this->connect, $expression);
+        $result = mysqli_fetch_assoc($query);
+        return $result;
+    }
+
 }
