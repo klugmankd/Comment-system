@@ -1,63 +1,20 @@
 $(function () {
     $(document).ready(function () {
-        $(".btn").click(function () {
-            var id = $(".field").attr('id');
-            $.ajax({
-                type: "POST",
-                url: "../CommentController/createAction",
-                data: {'content': $("textarea[name='field']").val(),
-                    'parentId': 0},
-                response: "text",
-                success: function (data) {
-                    var list = document.getElementById('list');
-                    var firstLi = list.getElementsByTagName('LI')[0];
-                    var newListElem = document.createElement('LI');
-                    newListElem.innerHTML = data;
-                    list.insertBefore(newListElem, firstLi);
-                    $("textarea[name='field']").attr('value', "");
-                    edit();
-                    remove();
-                    addCommentToComment();
-                }
-            })
-        });
-        $(".showComments").click(function () {
-            var parentId = $(this).val();
-            var listId = "#list_"+parentId;
-            var buttonId = "#hideBtn_"+parentId;
-            if ($(listId).css("display") == "none") {
-                $(listId).animate({height: 'show'}, 200);
-                $(this).hide();
-                $(buttonId).show();
-            }
-        });
-
-        $(".hideComments").click(function () {
-            var parentId = $(this).val();
-            var listId = "#list_"+parentId;
-            var buttonId = "#showBtn_"+parentId;
-            if ($(listId).css("display") == "block") {
-                $(listId).animate({height: 'hide'}, 200);
-                $(this).hide();
-                $(buttonId).show();
-            }
-        });
-
+        commentsShow();
+        commentsHide();
+        addComment();
+        commentFieldShow();
+        commentFieldHide();
         showComments();
-
-        addCommentToComment();
-
         remove();
-
         edit();
-
     });
 });
 
 function showComments() {
     $(".showComments").click(function () {
         var parentId = $(this).val();
-        var listId = "#list_"+parentId;
+        var listId = "#list"+parentId;
         $.ajax({
             type: "POST",
             url: "../CommentController/getAllChildAction",
@@ -72,44 +29,94 @@ function showComments() {
     });
 }
 
-function addCommentToComment() {
+function addComment() {
+    $(".addComment").click(function () {
+        var id = $(this).attr('id');
+        var parentId = $(this).val();
+        var listId = "list";
+        var areaId = "#area";
+        var list;
+        if (id != "addComment") {
+            listId = "list"+parentId;
+            areaId = "#area"+parentId;
+        }
+        var areaVal = $(areaId).val();
+        if (areaVal != "")
+        $.ajax({
+            type: "POST",
+            url: "../CommentController/createAction",
+            data: {'content': areaVal,
+                'parentId': parentId},
+            response: "text",
+            success: function (data) {
+                var list = document.getElementById(listId);
+                var firstLi = list.getElementsByTagName('LI')[0];
+                var newListElem = document.createElement('LI');
+                newListElem.innerHTML = data;
+                list.insertBefore(newListElem, firstLi);
+                $(areaId).attr('value', "");
+                $(list).show();
+                edit();
+                remove();
+                showComments();
+                addComment();
+                commentFieldShow();
+                commentFieldHide();
+            }
+        });
+    });
+}
+
+function commentFieldShow() {
     $(".commentFieldShow").click(function () {
         var id = $(this).val();
         var block = "#addCommentBlock"+id;
-        var tAreaId = "#comment_to_comment_"+id;
-        var listId = "#list_"+id;
-        $(block).show(500);
-        if ( $(block).css('display') == 'none' ) {
-            $(block).show(400);
+        var buttonId = "#commentFieldHide"+id;
+        if ($(block).css("display") == "none") {
+            $(block).animate({height: 'show'}, 200);
+            $(this).hide();
+            $(buttonId).show();
         }
-        $(".addComment").click(function () {
-            var id_button = $(this).attr('id');
-            if ($(tAreaId).val() == "") {
-                $(block).hide(200);
-            } else
-                $.ajax({
-                    type: "POST",
-                    url: "../CommentController/createAction",
-                    data: {'content': $(tAreaId).val(), 'parentId': id},
-                    response: "text",
-                    success: function (data) {
-                        var id_list = "list_"+id;
-                        var list = document.getElementById(id_list);
-                        var firstLi = list.getElementsByTagName('LI')[0];
-                        var newListElem = document.createElement('LI');
-                        newListElem.innerHTML = data;
-                        newListElem.className = "commentChild";
-                        list.insertBefore(newListElem, firstLi);
-                        $(tAreaId).attr('value', "");
-                        $(block).hide(200);
-                        $(listId).show();
-                        edit();
-                        remove();
-                        addCommentToComment()
-                    }
-                });
-        })
-    })
+    });
+}
+
+function commentFieldHide() {
+    $(".commentFieldHide").click(function () {
+        var id = $(this).val();
+        var block = "#addCommentBlock"+id;
+        var buttonId = "#commentFieldShow"+id;
+        if ($(block).css("display") == "block") {
+            $(block).animate({height: 'hide'}, 200);
+            $(this).hide();
+            $(buttonId).show();
+        }
+    });
+}
+
+function commentsHide() {
+    $(".hideComments").click(function () {
+        var parentId = $(this).val();
+        var listId = "#list"+parentId;
+        var buttonId = "#showBtn_"+parentId;
+        if ($(listId).css("display") == "block") {
+            $(listId).animate({height: 'hide'}, 200);
+            $(this).hide();
+            $(buttonId).show();
+        }
+    });
+}
+
+function commentsShow() {
+    $(".showComments").click(function () {
+        var parentId = $(this).val();
+        var listId = "#list"+parentId;
+        var buttonId = "#hideBtn_"+parentId;
+        if ($(listId).css("display") == "none") {
+            $(listId).animate({height: 'show'}, 200);
+            $(this).hide();
+            $(buttonId).show();
+        }
+    });
 }
 
 function edit() {
@@ -154,6 +161,6 @@ function remove() {
             success: function () {
                 comment.parentNode.removeChild(comment);
             }
-    })
+        })
     })
 }

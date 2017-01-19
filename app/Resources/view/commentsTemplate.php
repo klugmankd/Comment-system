@@ -1,8 +1,8 @@
 <div class="container" id="comments">
-    <center><h1>Comments<hr></h1></center>
+    <h1>Коментарі</h1>
     <div id="commentField">
-        <textarea id="field" class="field input-lg" name="field" placeholder="повідомлення"></textarea>
-        <input id="addComment" class="btn input-lg messageBtn" type="button" value="ok">
+        <textarea id="area" class="field input-lg" name="field" placeholder="повідомлення"></textarea>
+        <button id="addComment" class="btn input-lg addComment messageBtn formBtn animation" type="button" value="0">Надіслати</button>
     </div>
     <ul id="list" class="list">
     <?php

@@ -3,7 +3,6 @@
 
     if(empty(isset($_GET['route']))) {
         require_once 'app/Resources/view/linksTemplate.php';
-        require_once 'app/Resources/view/headerTemplate.php';
         require_once 'app/Resources/view/homeTemplate.php';
     } else {
         require_once 'app/Resources/view/headTemplate.php';
