@@ -18,7 +18,7 @@ class CommentController
         $commentModel = new CommentModel($connect);
         $comment = new Comment();
         $comment->setContent($_POST['content']);
-        $comment->setParent(0);
+        $comment->setParent($_POST['parentId']);
         $comment->setUser($_SESSION['id']);
         $commentModel->create($comment);
         $record = $commentModel->getLastComment();
@@ -74,4 +74,14 @@ class CommentController
         $database->closeDB($connect);
     }
 
+    public function getAllChildAction() {
+        $database = new Database();
+        $connect = $database->connectDB();
+        $commentModel = new CommentModel($connect);
+        $result = $commentModel->getCommentsByParent($_POST['parentId']);
+        while ($record = mysqli_fetch_array($result)) {
+            require 'app/Resources/view/commentTemplate.php';
+        }
+        $database->closeDB($connect);
+    }
 }

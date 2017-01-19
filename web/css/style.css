@@ -101,3 +101,78 @@ h2 {
     -ms-transition: all.6s ease;
     transition: all.6s ease;
 }
+
+ul li {
+    list-style-type: none;
+}
+
+#comments {
+    /*text-align: center;*/
+    width: 88%;
+    margin-left: 5%;
+    padding: 1%;
+}
+
+#comments #commentField {
+    width: 40%;
+    padding: 1%;
+    margin-left: 28%;
+}
+
+#comments #commentField #field {
+    display: inline-block;
+    /*text-align: center;*/
+    float: left;
+}
+
+#comments #commentField .messageBtn {
+    display: inline-block;
+    /*text-align: center;*/
+    float: left;
+}
+
+#comments .list {
+    /*background-color: rgba(101, 170, 252, 0.17);*/
+}
+
+#comments #list {
+    margin-top: 60px;
+    width: 70%;
+    margin-left: 15%;
+}
+
+#comments #list .comment {
+    margin-top: 10px;
+    background-color: rgba(101, 170, 252, 0.17);
+    padding: 1%;
+    border-radius: 10px;
+}
+
+#comments #list .comment .author {
+    font-size: 1.4em;
+    color: rgb(30, 117, 220);
+    padding: 1%;
+    border-bottom: 2px solid rgb(155, 194, 240);
+}
+
+#comments #list .comment .content {
+    color: rgb(30, 117, 220);
+    font-size: 1.3em;
+    padding: 2%;
+}
+
+#comments #list .comment .createDate {
+    color: rgb(30, 117, 220);
+    padding: 1%;
+    float: right;
+}
+
+#comments #list .comment .slash {
+}
+
+#comments #list .comment .commentButtons,
+#comments #list .comment .slash {
+    /*float: left;*/
+    font-size: 1.1em;
+    display: inline-block;
+}

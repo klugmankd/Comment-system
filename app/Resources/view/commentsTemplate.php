@@ -1,17 +1,16 @@
 <div class="container" id="comments">
     <center><h1>Comments<hr></h1></center>
-    <div>
+    <div id="commentField">
         <textarea id="field" class="field input-lg" name="field" placeholder="повідомлення"></textarea>
-        <input class="btn input-lg" type="button" value="ok">
+        <input id="addComment" class="btn input-lg messageBtn" type="button" value="ok">
     </div>
-    <ul id="list">
+    <ul id="list" class="list">
     <?php
-        while ($record = mysqli_fetch_array($result)) { ?>
-            <li id="comment_<?=$record['id']?>">
-                <?php
+        while ($record = mysqli_fetch_array($result)) {
+            if($record['parent_id'] == 0) {
                     require 'commentTemplate.php';
-                ?>
-            </li>
-        <?php } ?>
+            }
+        }
+    ?>
     </ul>
 </div>
