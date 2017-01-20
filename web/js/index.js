@@ -93,28 +93,32 @@ function commentFieldHide() {
     });
 }
 
+function commentsShow() {
+  $(".showComments").click(function () {
+    var parentId = $(this).val();
+    var listId = "#list"+parentId;
+    var buttonId = "#hideBtn_"+parentId;
+    var fieldBtnShow = "#commentFieldShow"+parentId;
+    if ($(listId).css("display") == "none") {
+      $(listId).animate({height: 'show'}, 200);
+      $(this).hide();
+      $(buttonId).show();
+      $(fieldBtnShow).hide();
+    }
+  });
+}
+
 function commentsHide() {
     $(".hideComments").click(function () {
         var parentId = $(this).val();
         var listId = "#list"+parentId;
         var buttonId = "#showBtn_"+parentId;
+        var fieldBtnShow = "#commentFieldShow"+parentId;
         if ($(listId).css("display") == "block") {
             $(listId).animate({height: 'hide'}, 200);
             $(this).hide();
             $(buttonId).show();
-        }
-    });
-}
-
-function commentsShow() {
-    $(".showComments").click(function () {
-        var parentId = $(this).val();
-        var listId = "#list"+parentId;
-        var buttonId = "#hideBtn_"+parentId;
-        if ($(listId).css("display") == "none") {
-            $(listId).animate({height: 'show'}, 200);
-            $(this).hide();
-            $(buttonId).show();
+            $(fieldBtnShow).show();
         }
     });
 }
